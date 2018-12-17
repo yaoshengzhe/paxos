@@ -5,6 +5,12 @@ java_binary(
 )
 
 java_library(
+    name = "acceptor",
+    srcs = ["Acceptor.java"],
+    deps = ["//src/com/yaoshengzhe/paxos/log:persistent_log"],
+)
+
+java_library(
     name = "Node",
     srcs = ["Node.java"]
 )
