@@ -6,7 +6,7 @@ import java.util.Map;
 public class InMemoryLog<T> implements PersistentLog<T> {
     Map<Long, T> data;
 
-    InMemoryLog() {
+    public InMemoryLog() {
         data = new HashMap<>();
     }
 

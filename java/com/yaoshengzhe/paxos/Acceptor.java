@@ -1,12 +1,15 @@
 package com.yaoshengzhe.paxos;
 
+import com.google.inject.Inject;
+import com.yaoshengzhe.paxos.Annotations.PersistentLogInstance;
 import com.yaoshengzhe.paxos.log.PersistentLog;
 
 public class Acceptor<T> {
     private final PersistentLog<T> persistentLog;
     private long highestProposalNumReceived = Long.MIN_VALUE;
 
-    Acceptor(PersistentLog<T> persistentLog) {
+    @Inject
+    Acceptor(@PersistentLogInstance PersistentLog<T> persistentLog) {
         this.persistentLog = persistentLog;
     }
 
@@ -27,5 +30,10 @@ public class Acceptor<T> {
             highestProposalNumReceived = proposalNum;
             return;
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("{highestProposalNumReceived: %d}", highestProposalNumReceived);
     }
 }

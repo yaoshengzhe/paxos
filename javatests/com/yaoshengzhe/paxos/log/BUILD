@@ -1,11 +1,11 @@
 java_test(
     name = "InMemoryLogTest",
     srcs = ["InMemoryLogTest.java"],
-    deps = ["//third_party/junit:junit4"],
+    deps = ["@org_junit_junit_4_12//jar"],
 )
 
 java_test(
     name = "PersistentLogTest",
     srcs = ["PersistentLogTest.java"],
-    deps = ["//third_party/junit:junit4"],
+    deps = ["@org_junit_junit_4_12//jar"],
 )
