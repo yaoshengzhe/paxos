@@ -25,6 +25,7 @@ hs_err_pid*
 # Intellij
 .idea
 *.iml
+.ijwb
 
 # Bazel
 bazel-*

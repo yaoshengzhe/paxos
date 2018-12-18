@@ -1,0 +1,10 @@
+directories:
+  java/com/yaoshengzhe/paxos
+  javatests/com/yaoshengzhe/paxos
+  third_party
+
+targets:
+  //java/com/yaoshengzhe/paxos/...
+  //javatests/com/yaoshengzhe/paxos/...
+
+workspace_type: java
