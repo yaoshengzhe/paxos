@@ -4,7 +4,7 @@ java_binary(
     main_class = "com.yaoshengzhe.paxos.ClusterMain",
     deps = [":paxos_module",
             "@com_google_inject_guice_4_0//jar",
-            ":acceptor"],
+            ":node"],
 )
 
 java_library(
@@ -23,7 +23,11 @@ java_library(
 
 java_library(
     name = "node",
-    srcs = ["Node.java"]
+    srcs = ["Node.java"],
+    deps = [":acceptor",
+            ":proposer",
+            "@javax_inject_1//jar",
+            "@com_google_inject_guice_4_0//jar",],
 )
 
 java_library(
@@ -35,4 +39,12 @@ java_library(
             "@javax_inject_1//jar",
             "@aopalliance_1_0//jar",
             ":annotations"],
+)
+
+java_library(
+    name = "proposer",
+    srcs = ["Proposer.java"],
+    deps = ["//java/com/yaoshengzhe/paxos/log:persistent_log",
+               "@com_google_inject_guice_4_0//jar",
+               ":annotations"],
 )

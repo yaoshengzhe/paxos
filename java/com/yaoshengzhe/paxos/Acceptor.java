@@ -4,12 +4,12 @@ import com.google.inject.Inject;
 import com.yaoshengzhe.paxos.Annotations.PersistentLogInstance;
 import com.yaoshengzhe.paxos.log.PersistentLog;
 
-public class Acceptor<T> {
-    private final PersistentLog<T> persistentLog;
+public class Acceptor {
+    private final PersistentLog<Long> persistentLog;
     private long highestProposalNumReceived = Long.MIN_VALUE;
 
     @Inject
-    Acceptor(@PersistentLogInstance PersistentLog<T> persistentLog) {
+    Acceptor(@PersistentLogInstance PersistentLog<Long> persistentLog) {
         this.persistentLog = persistentLog;
     }
 
@@ -17,7 +17,7 @@ public class Acceptor<T> {
         highestProposalNumReceived = Math.max(highestProposalNumReceived, proposalNum);
     }
 
-    void accept(long proposalNum, T value) {
+    void accept(long proposalNum, long value) {
         if (highestProposalNumReceived > proposalNum) {
             return;
         }
