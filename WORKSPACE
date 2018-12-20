@@ -9,6 +9,16 @@ maven_jar(
 )
 
 maven_jar(
+  name = "com_google_flogger_0_3_1",
+  artifact = "com.google.flogger:flogger:0.3.1"
+)
+
+maven_jar(
+  name = "com_google_flogger_system_backend_0_3_1",
+  artifact = "com.google.flogger:flogger-system-backend:0.3.1"
+)
+
+maven_jar(
   name = "com_google_inject_guice_4_0",
   artifact = "com.google.inject:guice:4.0"
 )

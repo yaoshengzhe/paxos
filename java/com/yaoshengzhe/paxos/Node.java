@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 public class Node {
     private final Proposer proposer;
     private final Acceptor acceptor;
+    private int id;
 
     @Inject
     Node(Proposer proposer, Acceptor acceptor) {
@@ -12,11 +13,13 @@ public class Node {
         this.acceptor = acceptor;
     }
 
-    void start() {
+    public Node setId(int id) {
+        this.id = id;
+        return this;
     }
 
     @Override
     public String toString() {
-        return String.format("Proposer: %s, Acceptor: %s", proposer, acceptor);
+        return String.format("Node: {Id: %d, Proposer: %s, Acceptor: %s}", id, proposer, acceptor);
     }
 }

@@ -2,9 +2,12 @@ java_binary(
     name = "ClusterMain",
     srcs = ["ClusterMain.java"],
     main_class = "com.yaoshengzhe.paxos.ClusterMain",
-    deps = [":paxos_module",
+    deps = ["@com_google_flogger_0_3_1//jar",
+            "@com_google_flogger_system_backend_0_3_1//jar",
+            ":paxos_module",
             "@com_google_inject_guice_4_0//jar",
-            ":node"],
+            ":node",
+            ":paxos_group"],
 )
 
 java_library(
@@ -38,7 +41,17 @@ java_library(
             "//java/com/yaoshengzhe/paxos/log:in_memory_log",
             "@javax_inject_1//jar",
             "@aopalliance_1_0//jar",
-            ":annotations"],
+            "@com_google_guava_23_0//jar",
+            ":annotations",
+            ":node",
+            ":paxos_group"],
+)
+
+java_library(
+    name = "paxos_group",
+    srcs = ["PaxosGroup.java"],
+    deps = ["@com_google_guava_23_0//jar",
+            ":node"],
 )
 
 java_library(
