@@ -13,12 +13,14 @@ java_test(
 java_test(
     name = "PaxosGroupTest",
     srcs = ["PaxosGroupTest.java"],
-    deps = ["//java/com/yaoshengzhe/paxos:paxos_group",
-            "//third_party/guice",
-            "//java/com/yaoshengzhe/paxos:paxos_module",
-            "//java/com/yaoshengzhe/paxos:node",
-            "//third_party/truth",
-            "//third_party/junit"],
+    deps = [
+        "//java/com/yaoshengzhe/paxos:node",
+        "//java/com/yaoshengzhe/paxos:paxos_group",
+        "//java/com/yaoshengzhe/paxos:paxos_module",
+        "//third_party/guice",
+        "//third_party/junit",
+        "//third_party/truth",
+    ],
 )
 
 java_test(
