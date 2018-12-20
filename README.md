@@ -37,15 +37,20 @@ P2c. For any v and n, if a proposal with value v and number n is issued, then th
 This project uses [Bazel](https://www.bazel.build) as the build engine.
 
 
-Build & Run:
+Build:
 
 ``` bash
-$ bazel build src/main/...
-$ bazel run src/main/com/yaoshengzhe/paxos:ClusterMain
+$ bazel build java/...
 ```
 
 Test:
 
 ``` bash
-$ bazel test src/...
+$ bazel test javatests/...
+```
+
+Run:
+
+``` bash
+$ bazel run java/com/yaoshengzhe/paxos:ClusterMain
 ```
