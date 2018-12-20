@@ -1,3 +1,5 @@
+package(default_visibility = ["//visibility:public"])
+
 java_binary(
     name = "ClusterMain",
     srcs = ["ClusterMain.java"],

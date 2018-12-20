@@ -24,6 +24,11 @@ maven_jar(
 )
 
 maven_jar(
+  name = "com_google_truth_0_42",
+  artifact = "com.google.truth:truth:0.42"
+)
+
+maven_jar(
   name = "javax_inject_1",
   artifact = "javax.inject:javax.inject:1"
 )
@@ -32,3 +37,20 @@ maven_jar(
   name = "org_junit_junit_4_12",
   artifact = "junit:junit:4.12"
 )
+
+maven_jar(
+  name = "org_junit_jupiter_5_3_2",
+  artifact = "org.junit.jupiter:junit-jupiter-api:5.3.2"
+)
+
+maven_jar(
+  name = "org_opentest4j_1_1_1",
+  artifact = "org.opentest4j:opentest4j:1.1.1"
+)
+
+maven_jar(
+  name = "org_apiguardian_1_0_0",
+  artifact = "org.apiguardian:apiguardian-api:1.0.0"
+)
+
+

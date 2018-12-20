@@ -14,12 +14,17 @@ public class PaxosGroup {
     }
 
     public void addNode(Node node) {
+        if (started) {
+            throw new IllegalStateException("PaxosGroup has been started," +
+                    "reconfiguration after start has not supported.");
+        }
         nodes.add(node);
     }
 
     public void start() {
         started = true;
     }
+
 
     @Override
     public String toString() {
