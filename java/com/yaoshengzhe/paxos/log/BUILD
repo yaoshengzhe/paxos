@@ -4,11 +4,11 @@ java_library(
     name = "in_memory_log",
     srcs = ["InMemoryLog.java"],
     deps = [":persistent_log",
-            "@com_google_guava_23_0//jar"],
+            "//third_party/guava"],
 )
 
 java_library(
     name = "persistent_log",
     srcs = ["PersistentLog.java"],
-    deps = ["@com_google_guava_23_0//jar"],
+    deps = ["//third_party/guava"],
 )

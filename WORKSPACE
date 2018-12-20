@@ -1,3 +1,5 @@
+load("@bazel_tools//tools/build_defs/repo:java.bzl", "java_import_external")
+
 maven_jar(
   name = "aopalliance_1_0",
   artifact = "aopalliance:aopalliance:1.0"
