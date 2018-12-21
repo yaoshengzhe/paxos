@@ -25,6 +25,7 @@ java_library(
     deps = [
         ":annotations",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
+        "//third_party/flogger",
         "//third_party/guice",
     ],
 )
@@ -32,9 +33,16 @@ java_library(
 java_library(
     name = "node",
     srcs = ["Node.java"],
+)
+
+java_library(
+    name = "node_impl",
+    srcs = ["NodeImpl.java"],
     deps = [
         ":acceptor",
         ":proposer",
+        ":node",
+        "//third_party/flogger",
         "//third_party/guice",
     ],
 )
@@ -44,7 +52,7 @@ java_library(
     srcs = ["PaxosModule.java"],
     deps = [
         ":annotations",
-        ":node",
+        ":node_impl",
         ":paxos_group",
         "//java/com/yaoshengzhe/paxos/log:in_memory_log",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
@@ -67,7 +75,9 @@ java_library(
     srcs = ["Proposer.java"],
     deps = [
         ":annotations",
+        ":node",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
+        "//third_party/flogger",
         "//third_party/guice",
     ],
 )

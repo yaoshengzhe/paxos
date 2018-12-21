@@ -1,9 +1,11 @@
 package com.yaoshengzhe.paxos;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalLong;
 
 public class PaxosGroup {
     private List<Node> nodes;
@@ -25,6 +27,14 @@ public class PaxosGroup {
         started = true;
     }
 
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+    public void propose(int id, long proposalNum, OptionalLong value) {
+        Preconditions.checkArgument(id >= 0 && id < nodes.size());
+        nodes.get(id).propose(proposalNum, value, nodes);
+    }
 
     @Override
     public String toString() {

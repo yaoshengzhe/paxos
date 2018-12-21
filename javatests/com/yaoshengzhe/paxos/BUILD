@@ -5,8 +5,8 @@ java_test(
 )
 
 java_test(
-    name = "NodeTest",
-    srcs = ["NodeTest.java"],
+    name = "NodeImplTest",
+    srcs = ["NodeImplTest.java"],
     deps = ["//third_party/junit"],
 )
 
@@ -15,6 +15,7 @@ java_test(
     srcs = ["PaxosGroupTest.java"],
     deps = [
         "//java/com/yaoshengzhe/paxos:node",
+        "//java/com/yaoshengzhe/paxos:node_impl",
         "//java/com/yaoshengzhe/paxos:paxos_group",
         "//java/com/yaoshengzhe/paxos:paxos_module",
         "//third_party/guice",

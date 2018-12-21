@@ -2,8 +2,9 @@ package com.yaoshengzhe.paxos;
 
 import org.junit.Test;
 
-public class NodeTest {
+public class NodeImplTest {
 
     @Test
-    public void shouldStart() {}
+    public void shouldStart() {
+    }
 }

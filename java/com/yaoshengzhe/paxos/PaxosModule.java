@@ -26,7 +26,7 @@ public class PaxosModule extends AbstractModule {
     }
 
     @Provides
-    PaxosGroup providesPaxosGroup(Provider<Node> nodeProvider) {
+    PaxosGroup providesPaxosGroup(Provider<NodeImpl> nodeProvider) {
         PaxosGroup group = new PaxosGroup();
         for (int i = 0; i < groupSize; i++) {
             group.addNode(nodeProvider.get().setId(i));
