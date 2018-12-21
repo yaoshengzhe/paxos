@@ -14,4 +14,9 @@ public class InMemoryLog<T> implements PersistentLog<T> {
     public void persist(long seqNum, T value) {
         data.putIfAbsent(seqNum, value);
     }
+
+    @Override
+    public Map<Long, T> asMap() {
+        return data;
+    }
 }

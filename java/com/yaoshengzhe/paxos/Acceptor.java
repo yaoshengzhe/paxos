@@ -37,6 +37,10 @@ public class Acceptor {
         }
     }
 
+    PersistentLog<Long> getLog() {
+        return persistentLog;
+    }
+
     @Override
     public String toString() {
         return String.format("{highestProposalNumReceived: %d}", highestProposalNumReceived);

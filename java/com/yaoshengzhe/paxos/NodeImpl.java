@@ -1,10 +1,13 @@
 package com.yaoshengzhe.paxos;
 
+import com.google.common.base.Joiner;
 import com.google.common.flogger.FluentLogger;
 import com.google.inject.Inject;
+import com.yaoshengzhe.paxos.log.PersistentLog;
 
 import java.util.List;
 import java.util.OptionalLong;
+import java.util.TreeMap;
 
 public class NodeImpl implements Node {
     enum State {
@@ -71,8 +74,14 @@ public class NodeImpl implements Node {
     }
 
     @Override
+    public PersistentLog<Long> getLog() {
+        return acceptor.getLog();
+    }
+
+    @Override
     public String toString() {
         return String.format("Node: {\n\tId: %d,\n\tProposer: %s,\n\tAcceptor: %s,\n\tState: " +
-                "%s\n}", id, proposer, acceptor, state);
+                        "%s\n\tCommit Log: %s\n}", id, proposer, acceptor, state,
+                Joiner.on(',').join(new TreeMap<>(getLog().asMap()).entrySet()));
     }
 }

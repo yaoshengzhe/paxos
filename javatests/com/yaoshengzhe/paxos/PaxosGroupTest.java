@@ -32,5 +32,7 @@ public class PaxosGroupTest {
 
         nodes.get(0).down();
         paxosGroup.propose(1, 0, OptionalLong.of(1));
+
+        System.out.println(paxosGroup);
     }
 }

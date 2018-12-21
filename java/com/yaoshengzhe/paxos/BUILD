@@ -33,6 +33,9 @@ java_library(
 java_library(
     name = "node",
     srcs = ["Node.java"],
+    deps = [
+        "//java/com/yaoshengzhe/paxos/log:persistent_log",
+    ],
 )
 
 java_library(
@@ -42,7 +45,9 @@ java_library(
         ":acceptor",
         ":proposer",
         ":node",
+        "//java/com/yaoshengzhe/paxos/log:persistent_log",
         "//third_party/flogger",
+        "//third_party/guava",
         "//third_party/guice",
     ],
 )
