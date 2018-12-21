@@ -5,7 +5,7 @@ java_test(
 )
 
 java_test(
-    name = "NodeImplTest",
+    name = "InMemoryNodeTest",
     srcs = ["InMemoryNodeTest.java"],
     deps = ["//third_party/junit"],
 )
@@ -14,10 +14,10 @@ java_test(
     name = "PaxosGroupTest",
     srcs = ["PaxosGroupTest.java"],
     deps = [
-        "//java/com/yaoshengzhe/paxos:node",
-        "//java/com/yaoshengzhe/paxos:in_memory_node",
-        "//java/com/yaoshengzhe/paxos:paxos_group",
         "//java/com/yaoshengzhe/paxos:paxos_module",
+        "//java/com/yaoshengzhe/paxos/core:node",
+        "//java/com/yaoshengzhe/paxos/core:in_memory_node",
+        "//java/com/yaoshengzhe/paxos/core:paxos_group",
         "//third_party/guice",
         "//third_party/junit",
         "//third_party/truth",

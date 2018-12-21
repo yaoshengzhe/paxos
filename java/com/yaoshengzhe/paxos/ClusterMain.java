@@ -3,6 +3,7 @@ package com.yaoshengzhe.paxos;
 import com.google.common.flogger.FluentLogger;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.yaoshengzhe.paxos.core.PaxosGroup;
 
 public class ClusterMain {
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();

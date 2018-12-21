@@ -1,7 +1,8 @@
-package com.yaoshengzhe.paxos;
+package com.yaoshengzhe.paxos.core;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.yaoshengzhe.paxos.PaxosModule;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class PaxosGroupTest {
 
     @Test
     public void shouldFailToAddNodeAfterStart() {
-        Injector injector = Guice.createInjector(new PaxosModule(5));
+        Injector injector = Guice.createInjector(PaxosModule.newBuilder().setGroupSize(5).build());
         PaxosGroup paxosGroup = injector.getInstance(PaxosGroup.class);
         paxosGroup.start();
 
@@ -24,7 +25,7 @@ public class PaxosGroupTest {
 
     @Test
     public void shouldStart() {
-        Injector injector = Guice.createInjector(new PaxosModule(5));
+        Injector injector = Guice.createInjector(PaxosModule.newBuilder().setGroupSize(5).build());
         PaxosGroup paxosGroup = injector.getInstance(PaxosGroup.class);
         paxosGroup.start();
 

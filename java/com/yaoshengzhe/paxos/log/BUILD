@@ -1,4 +1,7 @@
-package(default_visibility = ["//java/com/yaoshengzhe/paxos:__subpackages__"])
+package(default_visibility = [
+    "//java/com/yaoshengzhe/paxos:__subpackages__",
+    "//javatests/com/yaoshengzhe/paxos:__subpackages__",
+])
 
 java_library(
     name = "in_memory_log",

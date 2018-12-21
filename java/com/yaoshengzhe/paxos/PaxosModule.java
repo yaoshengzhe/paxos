@@ -6,6 +6,8 @@ import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.yaoshengzhe.paxos.Annotations.PersistentLogInstance;
 import com.yaoshengzhe.paxos.Annotations.TransportClientInstance;
+import com.yaoshengzhe.paxos.core.InMemoryNode;
+import com.yaoshengzhe.paxos.core.PaxosGroup;
 import com.yaoshengzhe.paxos.log.InMemoryLog;
 import com.yaoshengzhe.paxos.log.PersistentLog;
 import com.yaoshengzhe.paxos.transport.InProcessTransportClient;
@@ -47,12 +49,13 @@ public class PaxosModule extends AbstractModule {
         return new Builder();
     }
 
-    static class Builder {
+    public static class Builder {
         private int groupSize;
 
-        public void setGroupSize(int groupSize) {
+        public Builder setGroupSize(int groupSize) {
             Preconditions.checkArgument(groupSize > 0);
             this.groupSize = groupSize;
+            return this;
         }
 
         public PaxosModule build() {

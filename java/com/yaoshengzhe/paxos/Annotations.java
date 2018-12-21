@@ -11,12 +11,12 @@ public class Annotations {
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
     @BindingAnnotation
-    @interface PersistentLogInstance {
+    public @interface PersistentLogInstance {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
     @BindingAnnotation
-    @interface TransportClientInstance {
+    public @interface TransportClientInstance {
     }
 }

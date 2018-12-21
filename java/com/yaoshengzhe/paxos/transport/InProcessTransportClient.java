@@ -1,6 +1,6 @@
 package com.yaoshengzhe.paxos.transport;
 
-import com.yaoshengzhe.paxos.Node;
+import com.yaoshengzhe.paxos.core.Node;
 
 import java.util.List;
 import java.util.OptionalLong;

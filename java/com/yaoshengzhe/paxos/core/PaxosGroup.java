@@ -1,4 +1,4 @@
-package com.yaoshengzhe.paxos;
+package com.yaoshengzhe.paxos.core;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
@@ -11,7 +11,7 @@ public class PaxosGroup {
     private List<Node> nodes;
     private boolean started;
 
-    PaxosGroup() {
+    public PaxosGroup() {
         nodes = new ArrayList<>();
     }
 

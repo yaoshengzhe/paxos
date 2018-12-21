@@ -1,4 +1,4 @@
-package com.yaoshengzhe.paxos;
+package com.yaoshengzhe.paxos.core;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.inject.Inject;
