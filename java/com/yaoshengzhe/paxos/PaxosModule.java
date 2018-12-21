@@ -5,8 +5,11 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.yaoshengzhe.paxos.Annotations.PersistentLogInstance;
+import com.yaoshengzhe.paxos.Annotations.TransportClientInstance;
 import com.yaoshengzhe.paxos.log.InMemoryLog;
 import com.yaoshengzhe.paxos.log.PersistentLog;
+import com.yaoshengzhe.paxos.transport.InProcessTransportClient;
+import com.yaoshengzhe.paxos.transport.TransportClient;
 
 public class PaxosModule extends AbstractModule {
     private final int groupSize;
@@ -26,7 +29,13 @@ public class PaxosModule extends AbstractModule {
     }
 
     @Provides
-    PaxosGroup providesPaxosGroup(Provider<NodeImpl> nodeProvider) {
+    @TransportClientInstance
+    TransportClient providesTransportClient() {
+        return new InProcessTransportClient();
+    }
+
+    @Provides
+    PaxosGroup providesPaxosGroup(Provider<InMemoryNode> nodeProvider) {
         PaxosGroup group = new PaxosGroup();
         for (int i = 0; i < groupSize; i++) {
             group.addNode(nodeProvider.get().setId(i));

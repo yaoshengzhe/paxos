@@ -2,7 +2,7 @@ package com.yaoshengzhe.paxos;
 
 import org.junit.Test;
 
-public class NodeImplTest {
+public class InMemoryNodeTest {
 
     @Test
     public void shouldStart() {

@@ -39,8 +39,8 @@ java_library(
 )
 
 java_library(
-    name = "node_impl",
-    srcs = ["NodeImpl.java"],
+    name = "in_memory_node",
+    srcs = ["InMemoryNode.java"],
     deps = [
         ":acceptor",
         ":proposer",
@@ -57,10 +57,12 @@ java_library(
     srcs = ["PaxosModule.java"],
     deps = [
         ":annotations",
-        ":node_impl",
+        ":in_memory_node",
         ":paxos_group",
         "//java/com/yaoshengzhe/paxos/log:in_memory_log",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
+        "//java/com/yaoshengzhe/paxos/transport:transport_client",
+        "//java/com/yaoshengzhe/paxos/transport:in_process_transport_client",
         "//third_party/guava",
         "//third_party/guice",
     ],
@@ -82,6 +84,7 @@ java_library(
         ":annotations",
         ":node",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
+        "//java/com/yaoshengzhe/paxos/transport:transport_client",
         "//third_party/flogger",
         "//third_party/guice",
     ],

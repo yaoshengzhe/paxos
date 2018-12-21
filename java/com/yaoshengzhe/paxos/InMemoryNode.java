@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.OptionalLong;
 import java.util.TreeMap;
 
-public class NodeImpl implements Node {
+public class InMemoryNode implements Node {
     enum State {
         HEALTHY,
         PARTITIONED,
@@ -23,18 +23,18 @@ public class NodeImpl implements Node {
     private int id;
 
     @Inject
-    NodeImpl(Proposer proposer, Acceptor acceptor) {
+    InMemoryNode(Proposer proposer, Acceptor acceptor) {
         this.proposer = proposer;
         this.acceptor = acceptor;
         this.state = State.HEALTHY;
     }
 
-    public NodeImpl setId(int id) {
+    public InMemoryNode setId(int id) {
         this.id = id;
         return this;
     }
 
-    public NodeImpl setState(State state) {
+    public InMemoryNode setState(State state) {
         logger.atInfo().log("Node[%d] state change, old value: %s, new value: %s.", id,
                 this.state, state);
         this.state = state;
@@ -54,7 +54,7 @@ public class NodeImpl implements Node {
         }
     }
 
-    public void accept(long proposalNum, OptionalLong value) {
+    public void onReceiveProposal(long proposalNum, OptionalLong value) {
         switch (state) {
             case HEALTHY:
             case PARTITIONED:
@@ -71,6 +71,11 @@ public class NodeImpl implements Node {
     @Override
     public void down() {
         setState(State.DOWN);
+    }
+
+    @Override
+    public String getAddress() {
+        return null;
     }
 
     @Override

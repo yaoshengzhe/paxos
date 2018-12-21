@@ -17,7 +17,7 @@ public class PaxosGroupTest {
         PaxosGroup paxosGroup = injector.getInstance(PaxosGroup.class);
         paxosGroup.start();
 
-        Node node = injector.getInstance(NodeImpl.class);
+        Node node = injector.getInstance(InMemoryNode.class);
 
         assertThrows(IllegalStateException.class, () -> paxosGroup.addNode(node));
     }

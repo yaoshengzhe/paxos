@@ -8,9 +8,11 @@ import java.util.OptionalLong;
 public interface Node {
     void propose(long proposalNum, OptionalLong value, List<Node> nodes);
 
-    void accept(long proposalNum, OptionalLong value);
+    void onReceiveProposal(long proposalNum, OptionalLong value);
 
     void down();
+
+    String getAddress();
 
     PersistentLog<Long> getLog();
 }
