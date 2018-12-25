@@ -9,6 +9,7 @@ java_library(
     deps = [
         "//java/com/yaoshengzhe/paxos:annotations",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
+        "//java/com/yaoshengzhe/paxos/transport:transport_client",
         "//third_party/flogger",
         "//third_party/guice",
     ],
@@ -53,6 +54,7 @@ java_library(
         "//java/com/yaoshengzhe/paxos:annotations",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
         "//java/com/yaoshengzhe/paxos/transport:transport_client",
+        "//third_party/autovalue",
         "//third_party/flogger",
         "//third_party/guice",
     ],

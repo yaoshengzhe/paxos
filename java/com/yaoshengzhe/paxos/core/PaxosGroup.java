@@ -2,38 +2,37 @@ package com.yaoshengzhe.paxos.core;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalLong;
 
 public class PaxosGroup {
-    private List<Node> nodes;
+    private final ImmutableList<Node> nodes;
     private boolean started;
 
-    public PaxosGroup() {
-        nodes = new ArrayList<>();
-    }
-
-    public void addNode(Node node) {
-        if (started) {
-            throw new IllegalStateException("PaxosGroup has been started," +
-                    "reconfiguration after start has not supported.");
-        }
-        nodes.add(node);
+    public PaxosGroup(List<Node> nodes) {
+        this.nodes = ImmutableList.copyOf(nodes);
     }
 
     public void start() {
+        reconfiguration();
         started = true;
     }
 
-    public List<Node> getNodes() {
+    public void consensus(int id, long proposalNum, byte[] value) {
+        Preconditions.checkArgument(id >= 0 && id < nodes.size());
+        Preconditions.checkState(started, "PaxosGroup has NOT been started.");
+
+        nodes.get(id).propose(proposalNum, value);
+
+    }
+
+    public ImmutableList<Node> getNodes() {
         return nodes;
     }
 
-    public void propose(int id, long proposalNum, OptionalLong value) {
-        Preconditions.checkArgument(id >= 0 && id < nodes.size());
-        nodes.get(id).propose(proposalNum, value, nodes);
+    private void reconfiguration() {
+        nodes.forEach(node -> node.reconfiguration(nodes));
     }
 
     @Override

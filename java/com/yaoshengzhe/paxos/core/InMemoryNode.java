@@ -6,13 +6,13 @@ import com.google.inject.Inject;
 import com.yaoshengzhe.paxos.log.PersistentLog;
 
 import java.util.List;
-import java.util.OptionalLong;
+import java.util.Optional;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class InMemoryNode implements Node {
     enum State {
         HEALTHY,
-        PARTITIONED,
         DOWN
     }
 
@@ -29,8 +29,10 @@ public class InMemoryNode implements Node {
         this.state = State.HEALTHY;
     }
 
-    public InMemoryNode setId(int id) {
+    public Node setId(int id) {
         this.id = id;
+        proposer.setId(id);
+        acceptor.setId(id);
         return this;
     }
 
@@ -41,27 +43,58 @@ public class InMemoryNode implements Node {
         return this;
     }
 
-    public void propose(long proposalNum, OptionalLong value, List<Node> nodes) {
+    @Override
+    public void propose(long proposalNum, byte[] initialValue) {
         switch (state) {
             case HEALTHY:
-            case PARTITIONED:
-                logger.atInfo().log("Node[%d] made a proposal: {proposalNum: %s, value: " +
-                        "%s}.", id, proposalNum, value);
-                proposer.propose(proposalNum, value, nodes);
+                logger.atInfo().log("Node[%d] made a proposal: {proposalNum: %s, initialValue: " +
+                                "%s}.", id,
+                        proposalNum, initialValue);
+                proposer.propose(proposalNum, initialValue);
                 break;
             case DOWN:
                 break;
         }
     }
 
-    public void onReceiveProposal(long proposalNum, OptionalLong value) {
+    @Override
+    public void onReceiveProposal(long proposalNum) {
         switch (state) {
             case HEALTHY:
-            case PARTITIONED:
-                logger.atInfo().log("Node[%d] received a proposal: {proposalNum: %s, value: " +
-                                "%s}."
+                logger.atInfo().log("Node[%d] received a proposal: {proposalNum: %s}."
+                        , id, proposalNum);
+                acceptor.onReceiveProposal(proposalNum);
+                break;
+            case DOWN:
+                break;
+        }
+    }
+
+    @Override
+    public void onReceiveProposalResponse(long proposalNum, int acceptorId, long highestProposalNum,
+                                          Optional<byte[]> valueAccepted,
+                                          boolean accepted) {
+        switch (state) {
+            case HEALTHY:
+                logger.atFine().log("Node[%d] received a proposal response: {proposalNum: %s}."
+                        , id, proposalNum);
+                proposer.onReceiveProposeResponse(proposalNum, acceptorId, highestProposalNum,
+                        valueAccepted, accepted);
+                break;
+            case DOWN:
+                break;
+        }
+    }
+
+    @Override
+    public void onReceiveAccept(long proposalNum, byte[] value) {
+        switch (state) {
+            case HEALTHY:
+                logger.atFine().log("Node[%d] received an accept request: {proposalNum: %s, " +
+                                "value:" +
+                                " %s}."
                         , id, proposalNum, value);
-                acceptor.accept(proposalNum, value);
+                acceptor.onReceiveAccept(proposalNum, value);
                 break;
             case DOWN:
                 break;
@@ -74,12 +107,23 @@ public class InMemoryNode implements Node {
     }
 
     @Override
+    public void restart() {
+        setState(State.HEALTHY);
+    }
+
+    @Override
+    public void reconfiguration(List<Node> nodes) {
+        this.proposer.getTransportClient().setNodes(nodes);
+        this.acceptor.getTransportClient().setNodes(nodes);
+    }
+
+    @Override
     public String getAddress() {
         return null;
     }
 
     @Override
-    public PersistentLog<Long> getLog() {
+    public PersistentLog getLog() {
         return acceptor.getLog();
     }
 
@@ -87,6 +131,8 @@ public class InMemoryNode implements Node {
     public String toString() {
         return String.format("Node: {\n\tId: %d,\n\tProposer: %s,\n\tAcceptor: %s,\n\tState: " +
                         "%s\n\tCommit Log: %s\n}", id, proposer, acceptor, state,
-                Joiner.on(',').join(new TreeMap<>(getLog().asMap()).entrySet()));
+                Joiner.on(',').join(
+                        new TreeMap<>(getLog().asMap()).values().stream()
+                                .map(v -> new String(v)).collect(Collectors.toList())));
     }
 }

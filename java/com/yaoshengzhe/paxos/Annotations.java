@@ -11,6 +11,12 @@ public class Annotations {
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
     @BindingAnnotation
+    public @interface PaxosGroupSize {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
+    @BindingAnnotation
     public @interface PersistentLogInstance {
     }
 

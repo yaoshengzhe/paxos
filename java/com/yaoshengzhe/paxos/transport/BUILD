@@ -8,6 +8,7 @@ java_library(
     srcs = ["TransportClient.java"],
     deps = [
         "//java/com/yaoshengzhe/paxos/core:node",
+        "//third_party/guava",
     ],
 )
 
@@ -17,5 +18,7 @@ java_library(
     deps = [
         ":transport_client",
         "//java/com/yaoshengzhe/paxos/core:node",
+        "//third_party/guava",
+        "//third_party/guice",
     ],
 )

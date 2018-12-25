@@ -25,6 +25,7 @@ java_library(
     deps = [
         ":annotations",
         "//java/com/yaoshengzhe/paxos/core:in_memory_node",
+        "//java/com/yaoshengzhe/paxos/core:node",
         "//java/com/yaoshengzhe/paxos/core:paxos_group",
         "//java/com/yaoshengzhe/paxos/log:in_memory_log",
         "//java/com/yaoshengzhe/paxos/log:persistent_log",
